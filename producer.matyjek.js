@@ -67,7 +67,7 @@ try {
                     console.error('Something went wrong while retrieving data from aqicn');
                     console.error(err);
                 });
-        }, 20000);
+        }, 3600000);
 
 
     });
@@ -87,7 +87,7 @@ function generatePayload(city, body, partition, topic) {
         topic: topic,
         messages: body.data.data.iaqi.no2.v,
         key: city,
-        partitions: partition,
+        partition: partition,
         timestamp: Date.now()
     }
 }
