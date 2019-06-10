@@ -9,8 +9,7 @@ try {
     console.log(kafka_topic);
 
     producer.on('ready', async function () {
-        setInterval(() => {
-
+        function downloadAndStreamPollutionData() {
             axios.all([
                 axios.get('https://api.waqi.info/feed/warsaw/?token=1ae9f399f811ba4658b5f81937bec3ce5d60eda1'),
                 axios.get('https://api.waqi.info/feed/paris/?token=1ae9f399f811ba4658b5f81937bec3ce5d60eda1'),
@@ -67,6 +66,10 @@ try {
                     console.error('Something went wrong while retrieving data from aqicn');
                     console.error(err);
                 });
+        }
+        downloadAndStreamPollutionData();
+        setInterval(() => {
+            downloadAndStreamPollutionData();
         }, 3600000);
 
 
